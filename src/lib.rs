@@ -13,7 +13,7 @@ struct Entry {
 ///
 /// # Example
 /// ```
-/// use priprava_k_prvni_schuzce::HashTable2;
+/// use simplest_lockfree_hashtable::HashTable2;
 ///
 /// let size = 4;
 /// let hash_table = HashTable2::new(size);
@@ -73,7 +73,7 @@ impl HashTable2 {
             if probed_key != key {
                 // The entry was either free, or contains another key.
                 if probed_key != 0 {
-                    continue;           // Usually, it contains another key. Keep probing.
+                    continue; // Usually, it contains another key. Keep probing.
                 }
 
                 // The entry was free. Now let's try to take it using a CAS.
@@ -81,7 +81,7 @@ impl HashTable2 {
                     .key
                     .compare_exchange(0, key, Relaxed, Relaxed);
                 if prev_key.is_err() {
-                    continue;       // Another thread just stole it from underneath us.
+                    continue; // Another thread just stole it from underneath us.
                 }
 
                 // Either we just added the key, or another thread did.

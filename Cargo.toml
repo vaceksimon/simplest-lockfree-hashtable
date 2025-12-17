@@ -1,5 +1,5 @@
 [package]
-name = "priprava-k-prvni-schuzce"
+name = "simplest-lockfree-hashtable"
 version = "0.1.0"
 edition = "2024"
 
